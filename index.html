@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A demonstration of semantic HTML5 and accessible web components.">
+    <title>Accessible Web Components</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #202124;
+            background: #f4f7fb;
+        }
+
+        header, main, footer {
+            padding: 20px;
+        }
+
+        header {
+            background: #17365d;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+        }
+
+        main {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        section, article, form {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ccd5e0;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            font: inherit;
+        }
+
+        button {
+            color: white;
+            background: #174ea6;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a:focus-visible, input:focus-visible,
+        textarea:focus-visible, button:focus-visible {
+            outline: 3px solid #f9ab00;
+            outline-offset: 3px;
+        }
+
+        footer {
+            text-align: center;
+            background: #e2e8f0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Accessible Web Components</h1>
+        <p>A practical example of semantic HTML5.</p>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about" aria-labelledby="about-title">
+            <h2 id="about-title">About This Project</h2>
+            <p>
+                This webpage demonstrates semantic elements,
+                accessible forms, keyboard navigation, and
+                reusable page structure.
+            </p>
+        </section>
+
+        <section id="features" aria-labelledby="features-title">
+            <h2 id="features-title">Accessibility Features</h2>
+
+            <article>
+                <h3>Semantic HTML5</h3>
+                <p>
+                    Header, nav, main, section, article,
+                    and footer elements give content meaningful structure.
+                </p>
+            </article>
+
+            <article>
+                <h3>Keyboard Accessibility</h3>
+                <p>
+                    Links, inputs, and buttons can be reached using
+                    the keyboard, with visible focus indicators.
+                </p>
+            </article>
+
+            <article>
+                <h3>Accessible Forms</h3>
+                <p>
+                    Each form control has a visible label,
+                    and required fields are identified.
+                </p>
+            </article>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-title">
+            <h2 id="contact-title">Contact Form</h2>
+
+            <form id="contact-form">
+                <label for="name">Full name (required)</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    autocomplete="name"
+                    required
+                >
+
+                <label for="email">Email address (required)</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    required
+                >
+
+                <label for="message">Message (required)</label>
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    required
+                ></textarea>
+
+                <button type="submit">Validate form</button>
+                <p id="form-status" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>Semantic HTML5 &amp; Accessible Component Architecture</p>
+    </footer>
+    <script>
+        const form = document.getElementById("contact-form");
+        const status = document.getElementById("form-status");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                status.textContent = "Please complete all required fields correctly.";
+                return;
+            }
+
+            status.textContent =
+                "Form validation successful. This demo does not send data.";
+        });
+    </script>
+</body>
+</html>
